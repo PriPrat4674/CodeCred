@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "CodeCred",
+  "description": "Track Productive online activity and generate daily resume logs.",
+  "version": "1.0",
+  "permissions": ["tabs", "storage", "scripting", "activeTab"],
+  "host_permissions": [
+    "*://*.github.com/*",
+    "*://*.stackoverflow.com/*",
+    "*://developer.mozilla.org/*",
+    "*://*.medium.com/*",
+    "*://*.dev.to/*",
+    "*://*.w3schools.com/*",
+    "*://*.freecodecamp.org/*",
+    "*://*.geeksforgeeks.org/*",
+    "*://*.leetcode.com/*",
+    "*://chat.openai.com/*",
+    "*://claude.ai/*",
+    "*://gemini.google.com/*"
+  ],
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+}

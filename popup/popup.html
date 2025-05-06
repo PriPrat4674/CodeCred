@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeCred - Daily Log</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h2>CodeCred Dashboard</h2>
+      <div class="date-display" id="currentDate"></div>
+    </div>
+
+    <div class="stats-container">
+      <div class="stat-box">
+        <span class="stat-value" id="totalTime">0</span>
+        <span class="stat-label">Total Minutes</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" id="entryCount">0</span>
+        <span class="stat-label">Activities</span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-button active" data-tab="today">Today</button>
+      <button class="tab-button" data-tab="history">History</button>
+    </div>
+
+    <div class="tab-content" id="today-tab">
+      <table id="logTable">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Domain</th>
+            <th>Time (min)</th>
+          </tr>
+        </thead>
+        <tbody id="logBody"></tbody>
+      </table>
+      <div class="action-buttons">
+        <button id="exportBtn" class="main-btn">Export as Markdown</button>
+        <button id="clearBtn" class="secondary-btn">Clear Today's Data</button>
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="history-tab">
+      <div class="date-selector">
+        <button id="prevDay">&lt;</button>
+        <span id="selectedDate"></span>
+        <button id="nextDay">&gt;</button>
+      </div>
+      <div id="historyContent"></div>
+    </div>
+
+    <div class="footer">
+      <a href="#" id="optionsLink"></a>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
