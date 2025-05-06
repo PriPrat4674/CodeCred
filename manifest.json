@@ -14,7 +14,7 @@
     "*://*.freecodecamp.org/*",
     "*://*.geeksforgeeks.org/*",
     "*://*.leetcode.com/*",
-    "*://chat.openai.com/*",
+    "*://*.chatgpt.com/*",
     "*://claude.ai/*",
     "*://gemini.google.com/*"
   ],
