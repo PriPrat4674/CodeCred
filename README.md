@@ -43,7 +43,7 @@ Once installed, CodeCred begins tracking your activity on specified productive w
 
 (If you want to add more sites, you can edit in the settings!)
 
-## ⚙️ Configuration
+## Configuration
 
 By default, CodeCred tracks the productivity of predefined websites, but you can easily customize the list to suit your needs by updating the `PRODUCTIVE_SITES` variable.
 
