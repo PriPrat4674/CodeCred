@@ -13,12 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0];
-  currentDateEl.textContent = today.toLocaleDateString(undefined, {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  try {
+    currentDateEl.textContent = today.toLocaleDateString(undefined, {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  } catch (e) {
+    console.error(e);
+    currentDateEl.textContent = todayStr;
+  }
 
   tabButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -31,6 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
         content.classList.add("hidden");
       });
       document.getElementById(`${tabName}-tab`).classList.remove("hidden");
+
+      if (tabName === "history") {
+        loadHistoryData(currentViewDate);
+      } else if (tabName === "analytics") {
+        loadAnalyticsData(todayStr);
+      }
     });
   });
 

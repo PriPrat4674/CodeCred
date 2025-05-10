@@ -21,12 +21,16 @@ let currentTitle = null;
 let minTimeThreshold = 10;
 
 function loadSettings() {
-  chrome.storage.local.get(["settings"], (result) => {
-    if (result.settings) {
-      PRODUCTIVE_SITES = result.settings.sites || PRODUCTIVE_SITES;
-      minTimeThreshold = result.settings.minTime || minTimeThreshold;
-    }
-  });
+  try {
+    chrome.storage.local.get(["settings"], (result) => {
+      if (result.settings) {
+        PRODUCTIVE_SITES = result.settings.sites || PRODUCTIVE_SITES;
+        minTimeThreshold = result.settings.minTime || minTimeThreshold;
+      }
+    });
+  } catch (e) {
+    console.error("Error loading settings!", e);
+  }
 }
 
 chrome.tabs.onActivated.addListener(async (activeInfo) => {
@@ -49,13 +53,10 @@ chrome.windows.onFocusChanged.addListener((windowId) => {
   }
 });
 
-// Handle tab switch
 function handleTabSwitch(tabId) {
   try {
-    // End previous session
     endCurrentSession();
 
-    // Start new session if productive
     chrome.tabs.get(tabId, (tab) => {
       if (chrome.runtime.lastError || !tab || !tab.url) return;
 
@@ -91,7 +92,6 @@ function endCurrentSession() {
       });
     }
 
-    // Reset tracking variables
     currentTabId = null;
     currentStartTime = null;
     currentDomain = null;
@@ -114,7 +114,7 @@ function saveLog(activity) {
   );
 
   const category = PRODUCTIVE_SITES[matchedKey] || "General";
-  const minutesToAdd = activity.duration / 60;
+  const minutesToAdd = Math.round((activity.duration / 60) * 10) / 10;
 
   let pagePath = "";
   try {
@@ -128,9 +128,10 @@ function saveLog(activity) {
     const logs = result.dailyLogs || {};
     logs[today] = logs[today] || [];
 
-    const existingIndex = logs[today].findIndex((entry) =>
-      entry.includes(activity.domain)
-    );
+    const existingIndex = logs[today].findIndex((entry) => {
+      const match = entry.match(/(.*?) [-] (.*?) for ([\d.]+) min/);
+      return match && match[2] === activity.domain;
+    });
 
     if (existingIndex !== -1) {
       const existingEntry = logs[today][existingIndex];
@@ -153,7 +154,7 @@ function saveLog(activity) {
       activities: [],
     };
 
-    productivityData[today].totalMinutes += minutesToAdd;
+    productivityData[today].totalMinutes += parseFloat(minutesToAdd);
 
     productivityData[today].categories[category] =
       (productivityData[today].categories[category] || 0) + minutesToAdd;
@@ -226,7 +227,6 @@ function exportDailyLog(date) {
 
 loadSettings();
 
-// periodic check - inactive tabs (10 minutes)
 setInterval(() => {
   if (currentStartTime) {
     const now = Date.now();
@@ -240,4 +240,4 @@ setInterval(() => {
       });
     }
   }
-}, 10 * 60 * 1000);
+}, 2 * 60 * 1000);

@@ -3,7 +3,7 @@
   "name": "CodeCred",
   "description": "Track Productive online activity and generate daily resume logs.",
   "version": "1.0",
-  "permissions": ["tabs", "storage", "scripting", "activeTab"],
+  "permissions": ["tabs", "storage", "scripting", "activeTab", "downloads"],
   "host_permissions": [
     "*://*.github.com/*",
     "*://*.stackoverflow.com/*",
@@ -13,8 +13,8 @@
     "*://*.w3schools.com/*",
     "*://*.freecodecamp.org/*",
     "*://*.geeksforgeeks.org/*",
+    "*://chat.openai.com/*",
     "*://*.leetcode.com/*",
-    "*://*.chatgpt.com/*",
     "*://claude.ai/*",
     "*://gemini.google.com/*"
   ],
