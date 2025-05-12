@@ -13,10 +13,10 @@
     "*://*.w3schools.com/*",
     "*://*.freecodecamp.org/*",
     "*://*.geeksforgeeks.org/*",
-    "*://chat.openai.com/*",
     "*://*.leetcode.com/*",
     "*://claude.ai/*",
-    "*://gemini.google.com/*"
+    "*://gemini.google.com/*",
+    "*://*.linkedin.com/*"
   ],
   "icons": {
     "16": "icons/logo.png",

@@ -8,9 +8,9 @@ let PRODUCTIVE_SITES = {
   "freecodecamp.org": "Learning",
   "geeksforgeeks.org": "Learning",
   "leetcode.com": "Problem Solving",
-  "chat.openai.com": "AI Assistance",
   "claude.ai": "AI Assistance",
   "gemini.google.com": "AI Assistance",
+  "linkedin.com": "Networking",
 };
 
 let currentTabId = null;
